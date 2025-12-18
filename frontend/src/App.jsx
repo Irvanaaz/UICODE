@@ -12,7 +12,9 @@ import { AuthProvider, useAuth } from "./context/AuthContext";
 import { ChevronDown, Box, LayoutGrid } from "lucide-react";
 
 // --- IMPORT HALAMAN ---
-import Login from "./pages/Login";
+// PENTING: Kita import dari file "login" (kecil) tapi kita namakan "Login" (Besar)
+// supaya React mau menampilkannya sebagai halaman.
+import Login from "./pages/login";
 import Home from "./pages/Home";
 import CreateComponent from "./pages/CreateComponent";
 import AdminDashboard from "./pages/AdminDashboard";
@@ -76,7 +78,6 @@ const Navbar = () => {
                 {leftCategories.map((cat) => (
                   <Link
                     key={cat}
-                    // PENTING: Link mengarah ke halaman /elements, bukan Home
                     to={
                       cat === "All" ? "/elements" : `/elements?category=${cat}`
                     }
@@ -177,10 +178,15 @@ function App() {
 
           <Routes>
             <Route path="/" element={<Home />} />
-            <Route path="/elements" element={<ElementsPage />} />{" "}
-            {/* Route Halaman Baru */}
+            <Route path="/elements" element={<ElementsPage />} />
+
+            {/* DI SINI KUNCINYA:
+                path="/login" -> Alamat URL di browser
+                element={<Login />} -> Komponen yang ditampilkan (HARUS Huruf Besar)
+            */}
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />
+
             <Route path="/preview/:id" element={<PreviewPage />} />
             <Route
               path="/create"
