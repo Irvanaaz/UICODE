@@ -20,7 +20,6 @@ const Login = () => {
 
     try {
       await login(email, password);
-      toast.success("Login successful!");
       navigate("/"); // Redirect to Home after success
     } catch (err) {
       console.error(err);
@@ -119,3 +118,4 @@ const Login = () => {
 };
 
 export default Login;
+
