@@ -1,0 +1,20 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Setup Default Dark Mode */
+body {
+  @apply bg-dark-900 text-gray-200;
+  font-family: 'Inter', sans-serif;
+}
+
+/* Custom Scrollbar biar rapi */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  @apply bg-dark-900;
+}
+::-webkit-scrollbar-thumb {
+  @apply bg-dark-700 rounded-full hover:bg-gray-600;
+}
