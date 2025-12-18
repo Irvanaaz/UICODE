@@ -7,7 +7,7 @@ import { Lock, Mail, UserPlus, Loader } from "lucide-react";
 const Register = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [username, setUsername] = useState(""); // Opsional, kita simpan di field username
+  const [username, setUsername] = useState(""); 
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   const navigate = useNavigate();
@@ -22,15 +22,19 @@ const Register = () => {
         email: email,
         username: username,
         password: password,
-        role: "USER", // Default role user biasa
+        // HAPUS 'role' dari sini agar sesuai dengan schemas.py backend
+        // Backend akan otomatis set role = "USER"
       });
 
       // 2. Jika sukses
       toast.success("Account created! Please login.");
-      navigate("/login"); // Lempar ke halaman login
+      
+      // 3. Redirect ke Halaman Login
+      navigate("/login"); 
+
     } catch (error) {
       console.error(error);
-      // Cek pesan error dari backend (misal: Email already registered)
+      // Cek pesan error dari backend
       const msg = error.response?.data?.detail || "Registration failed.";
       toast.error(msg);
     } finally {
@@ -39,8 +43,9 @@ const Register = () => {
   };
 
   return (
-    <div className="flex items-center justify-center min-h-[80vh]">
+    <div className="flex items-center justify-center min-h-[calc(100vh-64px)] bg-dark-900 px-4">
       <div className="w-full max-w-md bg-dark-800 border border-dark-700 p-8 rounded-2xl shadow-2xl">
+        
         <div className="text-center mb-8">
           <h1 className="text-3xl font-bold text-white mb-2">Create Account</h1>
           <p className="text-gray-400">Join our community of developers</p>
@@ -103,7 +108,7 @@ const Register = () => {
                 onChange={(e) => setPassword(e.target.value)}
                 className="w-full bg-dark-900 border border-dark-700 text-white rounded-lg pl-10 pr-4 py-3 focus:outline-none focus:border-primary-500 focus:ring-1 focus:ring-primary-500 transition-colors"
                 placeholder="••••••••"
-                minLength={6} // Validasi minimal 6 karakter
+                minLength={6} 
               />
             </div>
           </div>
@@ -111,7 +116,7 @@ const Register = () => {
           <button
             type="submit"
             disabled={isSubmitting}
-            className="w-full flex justify-center py-3 px-4 border border-transparent rounded-lg shadow-sm text-sm font-medium text-white bg-green-600 hover:bg-green-500 focus:outline-none transition-all"
+            className="w-full flex justify-center py-3 px-4 border border-transparent rounded-lg shadow-sm text-sm font-bold text-white bg-primary-600 hover:bg-primary-500 focus:outline-none transition-all disabled:opacity-50 disabled:cursor-not-allowed"
           >
             {isSubmitting ? (
               <span className="flex items-center gap-2">
@@ -127,7 +132,7 @@ const Register = () => {
           <span className="text-gray-500">Already have an account? </span>
           <Link
             to="/login"
-            className="font-medium text-primary-500 hover:text-primary-400"
+            className="font-medium text-primary-500 hover:text-primary-400 hover:underline"
           >
             Log in
           </Link>
